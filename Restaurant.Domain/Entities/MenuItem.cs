@@ -14,7 +14,7 @@ public class MenuItem : Base
     {
        ValidateDomain(name, description, price);
     }
-    public void ValidateDomain(string name, string? description, decimal price)
+    private void ValidateDomain(string? name, string? description, decimal price)
     {
         DomainExceptionValidation.When(string.IsNullOrEmpty(name), "Name cannot be empty");
         DomainExceptionValidation.When(string.IsNullOrEmpty(description), "Description cannot be empty");

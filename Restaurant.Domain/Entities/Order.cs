@@ -16,7 +16,7 @@ public class Order : Base
     public decimal Total { get; set; }
     public IList<MenuItem>? MenuItems { get; set; }
     
-    public void ValidateDomain(int tableNumber)
+    private void ValidateDomain(int tableNumber)
     {
         DomainExceptionValidation.When(tableNumber <= 0, "'TableNumber' must be greater than or equal to 0.");
         TableNumber = tableNumber;

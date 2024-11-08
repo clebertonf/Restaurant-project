@@ -1,12 +1,13 @@
-﻿using Restaurant.Domain.Entities;
+﻿using System.Collections;
+using Restaurant.Domain.Entities;
 
 namespace Restaurant.Domain.Interfaces;
 
 public interface IOrderRepository
 {
-    Task<List<Order>> GetAllOrdersAsync();
-    Task<Order> GetOrderByIdAsync(Guid id);
+    Task<IEnumerable<Order>> GetAllOrdersAsync();
+    Task<Order> GetOrderByIdAsync(int id);
     Task<Order> CreateOrderAsync(Order order);
     Task<Order> UpdateOrderAsync(Order order);
-    Task RemoveOrderAsync(Order order);
+    Task<Order> DeleteOrderAsync(Order order);
 }
