@@ -10,4 +10,12 @@
     <ProjectReference Include="..\Restaurant.Domain\Restaurant.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Interfaces\" />
+    <Folder Include="Mappings\" />
+    <Folder Include="MenuItem\" />
+    <Folder Include="Order\" />
+    <Folder Include="Services\" />
+  </ItemGroup>
+
 </Project>
