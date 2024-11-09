@@ -13,9 +13,7 @@
   <ItemGroup>
     <Folder Include="CQRS\MenuItem\" />
     <Folder Include="CQRS\Order\" />
-    <Folder Include="Interfaces\" />
     <Folder Include="Mappings\" />
-    <Folder Include="Services\" />
   </ItemGroup>
 
 </Project>
