@@ -7,7 +7,7 @@ public class MenuItem : Base
     public string? Name { get; set; }
     public string? Description { get; set; }
     public decimal Price { get; set; }
-    public bool Available { get; set; } = default;
+    public bool Available { get; init; } = default;
     public Order? Order { get; set; }
 
     public MenuItem(string? name, string? description, decimal price)
