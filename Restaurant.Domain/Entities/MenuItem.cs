@@ -1,13 +1,12 @@
 ﻿using Restaurant.Domain.Validation;
-
 namespace Restaurant.Domain.Entities;
 
-public class MenuItem : Base
+public sealed class MenuItem : EntityBase
 {
-    public string? Name { get; set; }
-    public string? Description { get; set; }
-    public decimal Price { get; set; }
-    public bool Available { get; init; } = default;
+    public string? Name { get; private set; }
+    public string? Description { get; private set; }
+    public decimal Price { get; private set; }
+    public bool Available { get; private set; } = false;
     public Order? Order { get; set; }
 
     public MenuItem(string? name, string? description, decimal price)

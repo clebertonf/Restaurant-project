@@ -1,8 +1,7 @@
 ﻿using Restaurant.Domain.Validation;
-
 namespace Restaurant.Domain.Entities;
 
-public class Order : Base
+public sealed class Order : EntityBase
 {
     public Order(int tableNumber, decimal total)
     {
@@ -11,9 +10,9 @@ public class Order : Base
         Total = total;
     }
     
-    public DateTime Date { get; set; }
-    public int TableNumber { get; set; }
-    public decimal Total { get; set; }
+    public DateTime Date { get; private set; }
+    public int TableNumber { get; private set; }
+    public decimal Total { get; private set; }
     public IList<MenuItem>? MenuItems { get; set; }
     
     private void ValidateDomain(int tableNumber)

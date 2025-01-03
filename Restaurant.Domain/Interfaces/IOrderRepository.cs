@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using Restaurant.Domain.Entities;
-
+﻿using Restaurant.Domain.Entities;
 namespace Restaurant.Domain.Interfaces;
 
 public interface IOrderRepository
