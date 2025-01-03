@@ -28,7 +28,7 @@ public class MenuItemDto
     [DisplayName("Price")]
     public decimal Price { get; set; }
     
-    public bool Available { get; set; } = default;
+    public bool Available { get; set; }
     
     public Order? Order { get; set; }
 }

@@ -1,32 +1,49 @@
-﻿using Restaurant.Application.DTOS;
+﻿using AutoMapper;
+using Restaurant.Application.DTOS;
 using Restaurant.Application.Interfaces;
+using Restaurant.Domain.Entities;
+using Restaurant.Domain.Interfaces;
 
 namespace Restaurant.Application.Services;
 
 public class MenuItemService : IMenuItemService
 {
-    public Task<IEnumerable<MenuItemDto>> GetMenuItems()
+    private readonly IMenuItemRepository _menuItemRepository;
+    private readonly IMapper _mapper;
+
+    public MenuItemService(IMenuItemRepository menuItemRepository, IMapper mapper)
     {
-        throw new NotImplementedException();
+        _menuItemRepository = menuItemRepository;
+        _mapper = mapper;
     }
 
-    public Task<MenuItemDto> GetMenuItemById(int id)
+    public async Task<IEnumerable<MenuItemDto>> GetMenuItems()
     {
-        throw new NotImplementedException();
+        var menuItem = await _menuItemRepository.GetMenuItemsAsync();
+        return _mapper.Map<IEnumerable<MenuItemDto>>(menuItem);
     }
 
-    public Task AddMenuItem(MenuItemDto menuItemDto)
+    public async Task<MenuItemDto> GetMenuItemById(int id)
     {
-        throw new NotImplementedException();
+        var menuItem = await _menuItemRepository.GetMenuItemByIdAsync(id);
+        return _mapper.Map<MenuItemDto>(menuItem);
     }
 
-    public Task UpdateMenuItem(MenuItemDto menuItemDto)
+    public async Task AddMenuItem(MenuItemDto menuItemDto)
     {
-        throw new NotImplementedException();
+       var menuItem = _mapper.Map<MenuItem>(menuItemDto);
+       await _menuItemRepository.CreateMenuItemAsync(menuItem);
     }
 
-    public Task DeleteMenuItem(int id)
+    public async Task UpdateMenuItem(MenuItemDto menuItemDto)
     {
-        throw new NotImplementedException();
+        var menuItem = _mapper.Map<MenuItem>(menuItemDto);
+        await _menuItemRepository.UpdateMenuItemAsync(menuItem);
+    }
+
+    public async Task DeleteMenuItem(int id)
+    {
+        var menuItem = await _menuItemRepository.GetMenuItemByIdAsync(id);
+        await _menuItemRepository.DeleteMenuItemAsync(menuItem);
     }
 }
