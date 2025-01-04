@@ -1,49 +1,61 @@
 ﻿using AutoMapper;
+using MediatR;
+using Restaurant.Application.CQRS.Order.Commands;
+using Restaurant.Application.CQRS.Order.Queries;
 using Restaurant.Application.DTOS;
 using Restaurant.Application.Interfaces;
-using Restaurant.Domain.Entities;
-using Restaurant.Domain.Interfaces;
 
 namespace Restaurant.Application.Services;
 
 public class OrderService : IOrderService
 {
-    private readonly IOrderRepository _orderRepository;
+    private readonly IMediator _mediator;
     private readonly IMapper _mapper;
 
-    public OrderService(IOrderRepository orderRepository, IMapper mapper)
+    public OrderService(IMediator mediator, IMapper mapper)
     {
-        _orderRepository = orderRepository;
+        _mediator = mediator;
         _mapper = mapper;
     }
 
     public async Task<IEnumerable<OrderDto>> GetAllOrdersAsync()
     {
-        var order = await _orderRepository.GetAllOrdersAsync();
-        return _mapper.Map<IEnumerable<OrderDto>>(order);
+        var order = new OrderQuery();
+        if(order is null)
+            throw new NullReferenceException(nameof(order));
+        
+        var orders = await _mediator.Send(order);
+        return _mapper.Map<IEnumerable<OrderDto>>(orders);
     }
 
     public async Task<OrderDto> GetOrderByIdAsync(int id)
     {
-        var order = await _orderRepository.GetOrderByIdAsync(id);
+        var orderById = new OrderByIdQuery();
+        if (orderById is null)
+            throw new NullReferenceException(nameof(orderById));
+        
+        var order = await _mediator.Send(orderById);
         return _mapper.Map<OrderDto>(order);
     }
 
     public async Task AddOrderAsync(OrderDto order)
     {
-        var orderEntity = _mapper.Map<Order>(order);
-        await _orderRepository.CreateOrderAsync(orderEntity);
+        var orderEntity = _mapper.Map<OrderCreateCommand>(order);
+        await _mediator.Send(orderEntity);
     }
 
     public async Task UpdateOrderAsync(OrderDto order)
     {
-        var orderEntity = _mapper.Map<Order>(order);
-        await _orderRepository.UpdateOrderAsync(orderEntity);
+        var orderEntity = _mapper.Map<OrderUpdateCommand>(order);
+        await _mediator.Send(orderEntity);
     }
 
     public async Task DeleteOrderAsync(int id)
     {
-       var order = await _orderRepository.GetOrderByIdAsync(id);
-       await _orderRepository.DeleteOrderAsync(order);
+       var orderEntity = new OrderByIdQuery();
+       if (orderEntity is null)
+           throw new NullReferenceException(nameof(orderEntity));
+       
+       await _mediator.Send(orderEntity);
     }
 }

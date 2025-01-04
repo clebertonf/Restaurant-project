@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using MediatR;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Restaurant.Domain.Interfaces;
@@ -13,9 +14,12 @@ public static class DependencyInjection
     {
         services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(configuration
             .GetConnectionString("DefaultConnection"), b => b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
-
+        
         services.AddScoped<IMenuItemRepository, MenuItemRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
+        
+        var handlers = AppDomain.CurrentDomain.Load("Restaurant.Application");
+        services.AddMediatR(handlers);
 
         return services;
     }

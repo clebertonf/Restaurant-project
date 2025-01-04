@@ -1,8 +1,7 @@
 ﻿using MediatR;
-using Restaurant.Application.CQRS.MenuItem.Commands;
 using Restaurant.Domain.Interfaces;
 
-namespace Restaurant.Application.CQRS.MenuItem.Handlres.Commands_handlers;
+namespace Restaurant.Application.CQRS.MenuItem.Commands.Handlers;
 
 public class MenItemUpdateCommandHandler : IRequestHandler<MenuItemUpdateCommand, Domain.Entities.MenuItem>
 {

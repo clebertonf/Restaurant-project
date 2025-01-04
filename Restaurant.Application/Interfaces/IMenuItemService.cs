@@ -8,5 +8,5 @@ public interface IMenuItemService
     Task<MenuItemDto> GetMenuItemById(int id);
     Task AddMenuItem(MenuItemDto menuItemDto);
     Task UpdateMenuItem(MenuItemDto menuItemDto);
-    Task DeleteMenuItem(int id);
+    Task DeleteMenuItem(int? id);
 }
