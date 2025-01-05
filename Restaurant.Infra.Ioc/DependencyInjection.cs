@@ -2,6 +2,9 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Restaurant.Application.Interfaces;
+using Restaurant.Application.Mappings;
+using Restaurant.Application.Services;
 using Restaurant.Domain.Interfaces;
 using Restaurant.Infra.Data.Context;
 using Restaurant.Infra.Data.Repositories;
@@ -17,6 +20,9 @@ public static class DependencyInjection
         
         services.AddScoped<IMenuItemRepository, MenuItemRepository>();
         services.AddScoped<IOrderRepository, OrderRepository>();
+        services.AddScoped<IMenuItemService, MenuItemService>();
+        services.AddScoped<IOrderService, OrderService>();
+        services.AddAutoMapper(typeof(DomainToDtoMappingProfile));
         
         var handlers = AppDomain.CurrentDomain.Load("Restaurant.Application");
         services.AddMediatR(handlers);
