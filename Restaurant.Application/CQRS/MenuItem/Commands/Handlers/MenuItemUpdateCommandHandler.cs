@@ -3,11 +3,11 @@ using Restaurant.Domain.Interfaces;
 
 namespace Restaurant.Application.CQRS.MenuItem.Commands.Handlers;
 
-public class MenItemUpdateCommandHandler : IRequestHandler<MenuItemUpdateCommand, Domain.Entities.MenuItem>
+public class MenuItemUpdateCommandHandler : IRequestHandler<MenuItemUpdateCommand, Domain.Entities.MenuItem>
 {
     private readonly IMenuItemRepository _menuItemRepository;
 
-    public MenItemUpdateCommandHandler(IMenuItemRepository menuItemRepository)
+    public MenuItemUpdateCommandHandler(IMenuItemRepository menuItemRepository)
     {
         _menuItemRepository = menuItemRepository;
     }

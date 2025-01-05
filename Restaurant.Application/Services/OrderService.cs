@@ -30,7 +30,7 @@ public class OrderService : IOrderService
 
     public async Task<OrderDto> GetOrderByIdAsync(int id)
     {
-        var orderById = new OrderByIdQuery();
+        var orderById = new OrderByIdQuery(id);
         if (orderById is null)
             throw new NullReferenceException(nameof(orderById));
         
@@ -52,7 +52,7 @@ public class OrderService : IOrderService
 
     public async Task DeleteOrderAsync(int id)
     {
-       var orderEntity = new OrderByIdQuery();
+       var orderEntity = new OrderByIdQuery(id);
        if (orderEntity is null)
            throw new NullReferenceException(nameof(orderEntity));
        

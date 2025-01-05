@@ -1,6 +1,8 @@
-﻿namespace Restaurant.Application.CQRS.Order.Queries;
+﻿using MediatR;
+using Restaurant.Domain.Interfaces;
 
-public class OrderQuery
+namespace Restaurant.Application.CQRS.Order.Queries;
+
+public class OrderQuery : IRequest<IEnumerable<Domain.Entities.Order>>
 {
-    
 }

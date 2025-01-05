@@ -1,6 +1,6 @@
 ﻿namespace Restaurant.Application.CQRS.Order.Commands;
 
-public class OrderCreateCommand
+public class OrderCreateCommand : OrderCommand
 {
     
 }
